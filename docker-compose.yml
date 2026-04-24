@@ -1,0 +1,49 @@
+# Lectern AI landing page — Ugreen NAS deployment
+#
+# Two containers:
+#   - app-backend: nginx serving the static site from a read-only bind
+#     mount of this source tree
+#   - cloudflared-tunnel: Cloudflare Tunnel that exposes app-backend at
+#     https://iantrimble.com with automatic TLS and no open NAS ports
+#
+# Setup (one time):
+#   1. Create the tunnel in the Cloudflare Zero Trust dashboard, copy its
+#      token, paste into .env as CLOUDFLARE_TUNNEL_TOKEN=...
+#   2. In the tunnel's Public Hostname tab, configure:
+#        Subdomain: (blank) or www
+#        Domain:    iantrimble.com
+#        Service:   HTTP
+#        URL:       app-backend:80
+#   3. Start with: docker compose up -d
+#   4. Verify: curl -I https://iantrimble.com  → 200 OK
+#
+# Day-to-day: edit files in this directory on your Mac. Changes are live
+# at iantrimble.com immediately — nginx serves from the bind mount, no
+# rebuild needed.
+
+services:
+  app-backend:
+    image: nginx:alpine
+    container_name: app-backend
+    restart: unless-stopped
+    # No host-port mapping — public access only via the tunnel below.
+    expose:
+      - "80"
+    volumes:
+      # Mac path:  /Volumes/nas/projects/app-website
+      # NAS path:  /volume1/nas/projects/app-website (adjust if your
+      #            UGOS pool root differs — typical alternative is
+      #            /volume1/projects/app-website)
+      - /volume1/nas/projects/app-website:/usr/share/nginx/html:ro
+      # Minimal nginx config — gzip, cache headers, proper MIME types.
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - app-backend

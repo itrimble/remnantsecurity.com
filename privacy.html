@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Lectern AI</title>
+<meta name="description" content="Lectern AI privacy policy. We have no servers, store no content, and transmit your slides directly to the LLM provider you authenticated with.">
+<meta name="theme-color" content="#00C1C6">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/legal.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-brand">
+      <span class="nav-brand-icon">L</span>
+      <span>Lectern AI</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<main class="legal">
+  <div class="container">
+    <h1>Privacy Policy</h1>
+    <p class="revised">Last updated: April 24, 2026</p>
+
+    <p>
+      Lectern AI is a Mac app that runs on your computer. It does not phone home.
+      It does not have servers. It does not collect analytics. The sections below
+      describe this in detail so you can verify those claims against the app's
+      App Store Connect privacy disclosures and the app's <code>PrivacyInfo.xcprivacy</code>
+      manifest, which publishes the same information to Apple in machine-readable form.
+    </p>
+
+    <h2>1. Who we are</h2>
+    <p>
+      Lectern AI is developed and published by <strong>Ian Trimble</strong>, operating as
+      <strong>Remnant Security</strong>. Contact: <a href="mailto:privacy@iantrimble.com">privacy@iantrimble.com</a>.
+      If you need a mailing address for regulatory correspondence, email us first and
+      we will provide it.
+    </p>
+
+    <h2>2. Data Lectern AI itself collects</h2>
+    <p><strong>None that leaves your Mac.</strong> Specifically:</p>
+    <ul>
+      <li>
+        <strong>Your slides and presentations</strong> are read from the file(s) you
+        select, processed locally in the app's sandbox, and written to the output
+        folder you choose. No copy is kept by Lectern.
+      </li>
+      <li>
+        <strong>Generated talk tracks, handouts, labs, quizzes, diagrams, and PDFs</strong>
+        are written to disk in the location you pick. Nothing is uploaded anywhere by
+        Lectern.
+      </li>
+      <li>
+        <strong>Preferences</strong> (your chosen LLM provider, theme, output toggles, etc.)
+        are stored in macOS UserDefaults inside the app's sandbox container.
+      </li>
+      <li>
+        <strong>API keys</strong> are stored in the macOS Keychain (encrypted) and cached in
+        UserDefaults for fast access. They never leave your Mac except when used to
+        authenticate requests to the LLM provider you chose, below.
+      </li>
+    </ul>
+    <p>
+      Lectern ships with no telemetry, analytics SDK, crash reporter, or feature-flag
+      service. No data is sent to Remnant Security or Ian Trimble in the course of
+      using the app.
+    </p>
+
+    <h2>3. Data sent to third-party LLM providers (BYOK disclosure)</h2>
+    <p>
+      To generate talk tracks, handouts, quizzes, and other artifacts, Lectern needs
+      to send the text of your slides to a large language model. You bring your own
+      API key for one of seven supported providers. When you trigger a generation:
+    </p>
+    <ol>
+      <li>Lectern reads the slide text + any bullets, notes, and your selected options.</li>
+      <li>It authenticates directly to the provider using your API key — Remnant Security
+        has no servers in this path and cannot see your content or your key.</li>
+      <li>The provider processes the request under <em>their</em> privacy policy and
+        terms of service.</li>
+      <li>The response is returned to your Mac and written to the output folder.</li>
+    </ol>
+    <p>
+      Data governed by each provider's own privacy policy when you choose to use
+      them:
+    </p>
+    <ul>
+      <li><strong>Anthropic (Claude):</strong> <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a></li>
+      <li><strong>Google (Gemini):</strong> <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>
+      <li><strong>DeepSeek:</strong> <a href="https://chat.deepseek.com/downloads/DeepSeek%20Privacy%20Policy.html">chat.deepseek.com/downloads/DeepSeek Privacy Policy</a></li>
+      <li><strong>Moonshot (Kimi):</strong> <a href="https://kimi.moonshot.cn/user/agreement/privacyPolicy">kimi.moonshot.cn — privacy policy</a></li>
+      <li><strong>Alibaba (Qwen):</strong> <a href="https://terms.alicdn.com/legal-agreement/terms/privacy_policy/20240315202341736/20240315202341736.html">terms.alicdn.com — privacy policy</a></li>
+      <li><strong>xAI (Grok):</strong> <a href="https://x.ai/legal/privacy-policy">x.ai/legal/privacy-policy</a></li>
+      <li><strong>MiniMax:</strong> <a href="https://intl.minimaxi.com/protocol/privacy-policy">intl.minimaxi.com/protocol/privacy-policy</a></li>
+    </ul>
+    <p>
+      You are free to change provider per deck, or to disable AI generation
+      entirely by simply not providing an API key — Lectern still supports
+      importing your own talk tracks as plain text.
+    </p>
+
+    <h2>4. Live research (optional)</h2>
+    <p>
+      When &ldquo;Include live research&rdquo; is enabled in Output Options, Lectern
+      queries one or more web-search providers (Brave Search, Serper.dev, or Tavily)
+      using your API key for that provider. Search queries derived from your slide
+      content are sent. The search results are passed to your chosen LLM and
+      returned in the talk track with source citations. The same disclosure rules
+      in Section 3 apply.
+    </p>
+    <ul>
+      <li><strong>Brave Search:</strong> <a href="https://brave.com/privacy/browser/">brave.com/privacy</a></li>
+      <li><strong>Serper.dev:</strong> <a href="https://serper.dev/privacy">serper.dev/privacy</a></li>
+      <li><strong>Tavily:</strong> <a href="https://tavily.com/privacy">tavily.com/privacy</a></li>
+    </ul>
+
+    <h2>5. API-key storage</h2>
+    <p>
+      Keys you enter are stored in the macOS Keychain (encrypted at rest by the
+      OS) and cached in UserDefaults for fast access without repeatedly prompting
+      for Keychain permission. Neither location leaves your Mac. You can delete a
+      key at any time by clearing it from the app's Configuration screen, or by
+      removing its entry from Keychain Access.app.
+    </p>
+
+    <h2>6. Subscription billing (Pro tier)</h2>
+    <p>
+      Pro subscriptions are processed by <strong>Apple StoreKit 2</strong> on your
+      Mac. Lectern never sees payment information — only a StoreKit receipt
+      indicating your subscription state. Apple's privacy policy governs payment:
+      <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>.
+      Auto-renewal can be managed in App Store → your account → Subscriptions, per
+      Apple's standard terms.
+    </p>
+
+    <h2>7. Children</h2>
+    <p>
+      Lectern includes a &ldquo;K–12 education&rdquo; subject template but the app
+      itself is not directed at children under 13 and does not knowingly collect
+      information from them. The app's LLM calls (Section 3) are subject to the
+      respective provider's minimum-age rules; most require users to be 13 or older.
+    </p>
+
+    <h2>8. Cookies and tracking</h2>
+    <p>
+      This website (iantrimble.com) uses no cookies, no analytics, no tracking
+      pixels. The app itself uses no cookies, no analytics, and no tracking
+      pixels.
+    </p>
+
+    <h2>9. Data-rights requests</h2>
+    <p>
+      Because Remnant Security does not collect or store your data, there is no
+      data we can correct, export, or delete on your behalf. Deletion of data
+      held by third-party LLM providers should be requested directly from those
+      providers, whose privacy policies are linked in Section 3.
+    </p>
+
+    <h2>10. Changes to this policy</h2>
+    <p>
+      If we materially change this policy we will update the &ldquo;Last updated&rdquo;
+      date at the top and announce the change in the app's release notes. Minor
+      wording changes may be made without a release notice.
+    </p>
+
+    <p class="contact-block">
+      Questions? <a href="mailto:privacy@iantrimble.com">privacy@iantrimble.com</a>
+    </p>
+  </div>
+</main>
+
+</body>
+</html>
